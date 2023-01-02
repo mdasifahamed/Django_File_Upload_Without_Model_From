@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <div align = "center" >
+        <table cellspacing = "40">
+            <th>Name</th>
+            <th>Phtoto</th>
+            <tr>
+                <td align ="left">{{data.name}} </td><br>
+                {% if text %}
+                    <p>{{text}}</p>
+                {% endif %}
+                <td align ="right"><img src="{{data.img_path}}" alt="Image Deleted" srcset=""  height="200px" width="200px"></td>
+            </tr>
+        </table>
+            <form action="{% url 'UploadFile:update' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" value="{{data.id}}" name ="up_id" >Update Photo</button>
+            </form>
+        <a href="{% url 'UploadFile:home' %}">
+            <button>Back To Home</button>
+        </a>
+    </div>
+    
+</body>
+</html>

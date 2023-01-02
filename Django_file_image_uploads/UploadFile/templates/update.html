@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+<div align = "center">
+    {% if data %}
+        
+            <div align="center" >
+                    <table cellspacing = "40">
+
+                        <th>Name</th>
+                        <th>Picture</th>
+                        
+                        <tr>
+                            <td align ="center">{{data.name}}</td>
+                            <td align ="left"><img src="{{data.img_path}}" alt="" srcset="" height="100px" width="100px"></td>
+                        </tr>
+                        
+                    </table>
+            </div>
+
+
+
+
+            <div align = 'center'>
+                <form action="{% url 'UploadFile:updated' %}" method="post" enctype="multipart/form-data">
+
+                    {% csrf_token %}
+                    <table>
+                        <tr>
+                            <td align = "left">
+
+                                <p>Choose Photo To Update  :</p>
+                                
+                            </td>
+
+                            <td align="right">
+                                <input type="file" name ="update_pic" accept="image/*">
+                            </td>
+                        </tr>
+
+
+                    </table>
+                    <button type="submit" value="{{data.id}}" name="up_id">Update Photo</button>            
+                    
+                </form>
+            </div>
+
+    {% endif %}
+</div>
+    
+</body>
+</html>
+
+
+ 
+    

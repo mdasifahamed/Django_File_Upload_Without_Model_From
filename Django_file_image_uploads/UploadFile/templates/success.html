@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Uploaded For {{name}}</title>
+</head>
+<body>
+    <div align = "center">
+        {%for data in data %}
+        <div>
+            <p>File Path is : <a href="{{data.img_path}}"></a>{{data.img_path}}</p><br><br>
+            <p>Name Of The Object Is : {{data.name}}</p>
+            <img src="{{data.img_path}}" alt="Plaese Check-Again" width="100px" height="100px">
+        </div>
+        {% endfor %}
+
+        <a href="{%url 'UploadFile:all_data' %}">
+            <button>All Data</button>
+        </a>
+        <a href="{%url 'UploadFile:home' %}">
+            <button>Home</button>
+        </a>
+    </div>
+</body>
+</html>

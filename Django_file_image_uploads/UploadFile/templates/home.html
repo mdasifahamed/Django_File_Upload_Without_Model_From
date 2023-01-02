@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home To Upload Files</title>
+</head>
+<body>
+    <div align = "center">
+        
+        <form action="{% url 'UploadFile:uploads' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <table align="center">
+                <tr>
+                    
+                    <td>
+                        <label >Enter Name</label><br>
+                        <input type="text" name = "name">
+                    </td>
+                </tr>
+                <tr>
+                    
+                    <td>
+                        <label >Enter Photo</label><br>
+                        <input type="file" name = "image" accept="image/*">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <button type="submit">submit</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+        {%for data in data %}
+        <div>
+            <p>File Path is : <a href="{{data.img_path}}"></a>{{data.img_path}}</p><br><br>
+            <img src="{{data.img_path}}" alt="Plaese Check-Again">
+
+        </div>
+        
+        {% endfor %}
+
+        <a href="{%url 'UploadFile:all_data' %}">
+            <button>All Data</button>
+        </a>
+        <a href="{%url 'UploadFile:search' %}">
+            <button>Delete OR Update Data</button>
+        </a>
+    </div>
+    
+</body>
+</html>
