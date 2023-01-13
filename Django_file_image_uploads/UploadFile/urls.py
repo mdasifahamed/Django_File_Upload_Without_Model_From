@@ -11,6 +11,7 @@ urlpatterns =[
     path("delete/",views.delete, name='delete'),
     path("search/",views.search, name= 'search'),
     path("update/",views.update, name="update"),
+    path("after_upload/",views.after_upload,name = "after_upload"),
     path("delete_photo_temp/",views.delete_photo_temp,name="delete_photo_temp"),
     path("updated/",views.updated,name="updated"),
     path("delete/",views.delete,name = 'delete'),

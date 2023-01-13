@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import HttpResponse,HttpResponseRedirect
+from django.http import HttpResponse,HttpResponseRedirect,JsonResponse
 from django.template import loader
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files.storage import FileSystemStorage
@@ -15,7 +15,7 @@ def home(request):
 
 @csrf_exempt
 def uploads(request):
-    s_temp = loader.get_template('success.html')
+    
     if request.method == 'POST':
         name = request.POST.get('name')
         photo = request.FILES.get('image')
@@ -23,24 +23,34 @@ def uploads(request):
         upload_handle = FileSystemStorage()
         uploaded_file = upload_handle.save(photo_name,photo)
         file_url = upload_handle.url(uploaded_file)
-        print(name,file_url)
+        print(name,photo)
         profile = Uploads(
             name = name,
             img_path = file_url,
         )
         profile.save()
-        datas = Uploads.objects.filter(name = name)
-        context = {
-            'image_url' :file_url,
-            'name':name,
-            'data':datas,
+        resp = {
+            'status':"success",
         }
-        
-        return HttpResponse(s_temp.render(context,request))
+        return JsonResponse(resp)
+
     else:
         return HttpResponse("Make It Perfect")
 
+def after_upload(request):
+
+    s_temp = loader.get_template('success.html')
+    data = Uploads.objects.order_by("id").last()
+
+    context ={
+        'data':data,
+    }
+
+    return HttpResponse(s_temp.render(context,request))
+
 def all_data(request):
+
+
 
     all = Uploads.objects.all()
     a_temp = loader.get_template('all.html')
